@@ -1,0 +1,29 @@
+.todoItem {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0px 3px 6px 3px #dedede;
+  background-color: lightblue;
+
+  .todoItemActions {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+
+    button {
+      padding: 0;
+      color: crimson;
+      font-size: 22px;
+      line-height: 0.6;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  .todoItemSelect {
+    flex-grow: 1;
+  }
+}
