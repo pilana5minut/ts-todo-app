@@ -1,7 +1,11 @@
-import './App.css'
+import { NewTodoForm } from './features/todos/NewTodoForm'
 
 function App() {
-  return <div>TypeScript Todo App</div>
+  return (
+    <div>
+      <NewTodoForm />
+    </div>
+  )
 }
 
 export default App
