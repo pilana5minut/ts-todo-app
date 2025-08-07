@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../hooks/hooks'
 import { Todo } from '../../types/todos'
 import cl from './TodoItem.module.css'
 import { completedTodo, priorityChange, removeTodo } from './todosSlice'
+import cn from 'classnames'
 
 interface TodoItemProps extends Todo {}
 
@@ -27,12 +28,25 @@ const TodoItem: FC<TodoItemProps> = ({ id, completed, priority, content }) => {
   }
 
   return (
-    <li className={cl.todoItem}>
+    <li className={cn(cl.todoItem, { [cl.completed]: completed })}>
       <div className={cl.todoItemActions}>
         <input type="checkbox" onChange={handleCompleted} checked={checkboxValue} />
         <div className={cl.todoItemSelect}>
-          <label htmlFor="priority">Priority</label>
-          <select id="priority" value={selectedValue} onChange={handleChange}>
+          <label className={cl.todoItemLabel} htmlFor="priority">
+            Priority
+          </label>
+          <select
+            className={cn(
+              cl.todoItemLabel,
+              { [cl.selectColorHigh]: priority === 'high' },
+              { [cl.selectColorMedium]: priority === 'medium' },
+              { [cl.selectColorLow]: priority === 'low' }
+            )}
+            disabled={completed}
+            id="priority"
+            value={selectedValue}
+            onChange={handleChange}
+          >
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
