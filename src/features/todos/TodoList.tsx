@@ -7,9 +7,9 @@ const TodoList = () => {
 
   return (
     <ul className={cl.todoList}>
-      {listTodo.map((todo) => {
-        return <TodoItem {...todo} />
-      })}
+      {listTodo.map((todo) => (
+        <TodoItem key={todo.id} {...todo} />
+      ))}
     </ul>
   )
 }

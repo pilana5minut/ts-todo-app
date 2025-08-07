@@ -1,6 +1,6 @@
 export type Todo = {
-  id: number
+  id: string
   completed: boolean
-  priority: 'important' | 'not-important' | 'medium-important'
+  priority: 'high' | 'medium' | 'low'
   content: string
 }

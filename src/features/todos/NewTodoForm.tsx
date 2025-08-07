@@ -12,9 +12,9 @@ const NewTodoForm: FC<NewTodoFormProps> = () => {
   const handleCreateTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const newTodo: Todo = {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       completed: false,
-      priority: 'important',
+      priority: 'low',
       content: inputText,
     }
     dispatch(addTodo(newTodo))

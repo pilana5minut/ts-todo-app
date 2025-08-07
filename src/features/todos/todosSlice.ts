@@ -4,16 +4,21 @@ import { Todo } from '../../types/todos'
 
 const mockDataTodos: Todo[] = [
   {
-    id: Date.now(),
+    id: crypto.randomUUID(),
     completed: false,
-    priority: 'important',
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    priority: 'high',
+    content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
   },
   {
-    id: Date.now(),
+    id: crypto.randomUUID(),
+    completed: false,
+    priority: 'medium',
+    content: 'Lorem Ipsum is simply dummy',
+  },
+  {
+    id: crypto.randomUUID(),
     completed: true,
-    priority: 'not-important',
+    priority: 'low',
     content:
       'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
   },
@@ -34,8 +39,15 @@ export const todosSlice = createSlice({
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.todos.push(action.payload)
     },
+    completedTodo: (state, action: PayloadAction<Todo['id']>) => {
+      const currentTodo = state.todos.find((todo) => todo.id === action.payload)
+      if (currentTodo) {
+        currentTodo.completed = !currentTodo.completed
+        state.todos.push(currentTodo)
+      }
+    },
   },
 })
 
 export default todosSlice.reducer
-export const { addTodo } = todosSlice.actions
+export const { addTodo, completedTodo } = todosSlice.actions
