@@ -39,15 +39,30 @@ export const todosSlice = createSlice({
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.todos.push(action.payload)
     },
+
     completedTodo: (state, action: PayloadAction<Todo['id']>) => {
       const currentTodo = state.todos.find((todo) => todo.id === action.payload)
       if (currentTodo) {
         currentTodo.completed = !currentTodo.completed
-        state.todos.push(currentTodo)
+      }
+    },
+
+    removeTodo: (state, action: PayloadAction<Todo['id']>) => {
+      const indexCurrentTodo = state.todos.findIndex((todo) => todo.id === action.payload)
+      state.todos.splice(indexCurrentTodo, 1)
+    },
+
+    priorityChange: (
+      state,
+      action: PayloadAction<{ id: string; selectedValue: Todo['priority'] }>
+    ) => {
+      const currentTodo = state.todos.find((todo) => todo.id === action.payload.id)
+      if (currentTodo) {
+        currentTodo.priority = action.payload.selectedValue
       }
     },
   },
 })
 
 export default todosSlice.reducer
-export const { addTodo, completedTodo } = todosSlice.actions
+export const { addTodo, completedTodo, removeTodo, priorityChange } = todosSlice.actions

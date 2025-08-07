@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { useAppDispatch } from '../../hooks/hooks'
 import { Todo } from '../../types/todos'
 import cl from './TodoItem.module.css'
-import { completedTodo } from './todosSlice'
+import { completedTodo, priorityChange, removeTodo } from './todosSlice'
 
 interface TodoItemProps extends Todo {}
 
@@ -17,7 +17,13 @@ const TodoItem: FC<TodoItemProps> = ({ id, completed, priority, content }) => {
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(event.target.value as Todo['priority'])
+    const newPriority = event.target.value as Todo['priority']
+    setSelectedValue(newPriority)
+    dispatch(priorityChange({ id, selectedValue: newPriority }))
+  }
+
+  const handleRemove = () => {
+    dispatch(removeTodo(id))
   }
 
   return (
@@ -32,7 +38,9 @@ const TodoItem: FC<TodoItemProps> = ({ id, completed, priority, content }) => {
             <option value="low">Low</option>
           </select>
         </div>
-        <button type="button">&times;</button>
+        <button type="button" onClick={handleRemove}>
+          &times;
+        </button>
       </div>
       <div>
         <span>{content}</span>

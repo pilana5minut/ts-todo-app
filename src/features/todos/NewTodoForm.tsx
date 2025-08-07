@@ -18,6 +18,7 @@ const NewTodoForm: FC<NewTodoFormProps> = () => {
       content: inputText,
     }
     dispatch(addTodo(newTodo))
+    setInputText('')
   }
 
   return (
